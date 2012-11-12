@@ -1,19 +1,20 @@
 
 var fs = require("fs");
-var sharejs = require("share").server;
 var express = require("express");
+
+var io = require('socket.io');
 
 var imagePath = __dirname + "/opinsys.png";
 var index = __dirname + "/index.html";
 
 var app = express();
+var server = require('http').createServer(app);
+io = io.listen(server);
 
-sharejs.attach(app, {
-  db: {
-   type: "none"
-  }
+io.configure(function () {
+  // io.set('transports', ['websocket']);
+  io.set('transports', ['xhr-polling']);
 });
-
 
 app.get("/", function(req, res){
   res.setHeader("Content-Type", "text/html");
@@ -26,7 +27,10 @@ app.get("/:id/image.png", function(req, res){
   fs.createReadStream(imagePath).pipe(res);
 });
 
-app.listen(3000, function(){
+server.listen(3000, function(){
   console.log("listening on 3000");
 });
 
+io.on("connection", function(socket){
+  console.log("Got socket.io connection");
+});

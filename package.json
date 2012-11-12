@@ -2,10 +2,9 @@
     "name": "sharejsipad",
     "version": "0.0.0",
     "dependencies": {
-        "share": "0.5.x",
-        "express": "3.0.x"
+        "socket.io": "",
+        "express": ""
     },
-    "subdomain": "epeli.sharejsipad",
     "scripts": {
         "start": "server.js"
     },
