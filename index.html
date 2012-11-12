@@ -21,14 +21,15 @@
   <script>
     document.getElementById("before-sharejs").innerHTML = '<img src="/before' + parseInt(Math.random()*100000) + '/image.png" >';
     sharejs.open("mydoc", "json", function(err, doc){
-      if (err) {
-        document.getElementById("status").innerHTML = "Failed to load ShareJS!";
-      }
-      console.log("sharejs", err, doc);
 
-      document.getElementById("status").innerHTML = "ShareJS loaded.";
+      setTimeout(function(){
+        if (err) {
+          return document.getElementById("status").innerHTML = "Failed to load ShareJS!";
+        }
+        document.getElementById("status").innerHTML = "ShareJS loaded.!";
+        document.getElementById("after-sharejs").innerHTML = '<img src="/after' + parseInt(Math.random()*100000) + '/image.png" >';
+      }, 500);
 
-      document.getElementById("after-sharejs").innerHTML = '<img src="/after' + parseInt(Math.random()*100000) + '/image.png" >';
     });
 
   </script>
